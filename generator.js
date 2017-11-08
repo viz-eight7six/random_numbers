@@ -44,6 +44,12 @@ class Generator {
     return num;
   }
 
+  lastNum(){
+    let date = new Date(new Date().getTime()).toLocaleString();
+    let last = this.state.store[this.state.store.length - 1];
+    return {date:date, num:last};
+  }
+
   //generate our results my doing some simple math we find our last 100 or less
   //and return the results as a string
   generateStats(){
@@ -53,17 +59,19 @@ class Generator {
       countHash[num] += 1;
     });
     let result =
-`Results: \n
-  1: ${countHash[1]/count*100}%\n
-  2: ${countHash[2]/count*100}%\n
-  3: ${countHash[3]/count*100}%\n
-  4: ${countHash[4]/count*100}%\n
-  5: ${countHash[5]/count*100}%`;
+`Results:
+  1: ${(countHash[1]/count*100).toPrecision(3)}%
+  2: ${(countHash[2]/count*100).toPrecision(3)}%
+  3: ${(countHash[3]/count*100).toPrecision(3)}%
+  4: ${(countHash[4]/count*100).toPrecision(3)}%
+  5: ${(countHash[5]/count*100).toPrecision(3)}%`;
+    console.log(countHash);
+    console.log(count);
     return result;
   }
 }
 
-// export default Generator;
+module.exports = Generator;
 
 //test script
 let one = new Generator();
@@ -71,3 +79,4 @@ for(var i = 0; i <100 ; i++){
   one.generateNum();
 }
 console.log(one.generateStats());
+console.log(one.lastNum());
