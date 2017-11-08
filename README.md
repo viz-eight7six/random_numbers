@@ -1,17 +1,17 @@
 # Random Number Generator
 
 ## How to Run
-  Pull this repo
-  run npm install
-  run node test.js
+  1. Pull this repo
+  2. run npm install
+  3. run node test.js
 
 ## Features
   Generates random numbers (1 - 5) based on the following ratios
-    1: 50%
-    2: 25%
-    3: 15%
-    4: 5%
-    5: 5%
+  *  1: 50%
+  *  2: 25%
+  *  3: 15%
+  *  4: 5%
+  *  5: 5%
 
   Prints statistics of last 100 numbers(or less)
 
