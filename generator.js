@@ -1,5 +1,3 @@
-
-
 class Generator {
 
   //initialize with a empty array store
@@ -41,6 +39,9 @@ class Generator {
   generateNum(cb){
     let num = this._getRandomNum();
     this._storeResult(num);
+    //this call back is just to make our calls asynchronous to add data to
+    //the writer class, this ensures that we write after the number is generated
+    //we can run without it too using this if statement
     if(cb){cb();}
     return num;
   }

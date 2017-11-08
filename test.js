@@ -63,4 +63,5 @@ setTimeout(() => {
   console.log('generator3 stats:\n', gen3.generateStats());
   console.log('generator4 stats:\n', gen4.generateStats());
   console.log('generator5 stats:\n', gen5.generateStats());
+  writer1.writeAll();
 }, 11000);

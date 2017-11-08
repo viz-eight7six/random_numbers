@@ -1,6 +1,7 @@
 //we use a heap to ensure everytime something is queued into the writer
 //that is is sorted chronologically
 var Heap = require('heap');
+var fs = require('fs');
 
 class Writer {
 
@@ -23,12 +24,27 @@ class Writer {
   enqueue(arr){
     this.state.queue.push(arr);
   }
-  //when we decide to write we remove teh first item in teh queue and return a
-  //string with the date and the number generated
+  //when we decide to write we remove teh first item in the queue and write
+  //to file a string with the date and the number generated
   writeFirst(){
     let first = this.state.queue.pop();
-    return `${first.date}: number generated was ${first.num}`;
+    let appendString = `${first.date}: number generated was ${first.num}`;
+    fs.appendFile('data.txt', `\n${appendString}`, function (err) {
+      if (err) throw err;
+    });
   }
+
+  writeAll(){
+    //add a space to separate data everytime we call writeAll
+    fs.appendFile('data.txt', ``, function (err) {
+      if (err) throw err;
+    });
+    while(!this.state.queue.empty()){
+      this.writeFirst();
+    }
+    console.log('All Data Saved!');
+  }
+
 }
 
 module.exports = Writer;
