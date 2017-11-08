@@ -38,12 +38,14 @@ class Generator {
   }
 
   //our public method to handle our number generation
-  generateNum(){
+  generateNum(cb){
     let num = this._getRandomNum();
     this._storeResult(num);
+    if(cb){cb();}
     return num;
   }
 
+  //generates our last number generated and return it as a obj with date and the number
   lastNum(){
     let date = new Date(new Date().getTime()).toLocaleString();
     let last = this.state.store[this.state.store.length - 1];
@@ -58,6 +60,8 @@ class Generator {
     this.state.store.forEach(num => {
       countHash[num] += 1;
     });
+    //we print out our results to 3 sigfigs, when the queue has 100 numbers
+    //we should just get whole numbers
     let result =
 `Results:
   1: ${(countHash[1]/count*100).toPrecision(3)}%
@@ -65,8 +69,6 @@ class Generator {
   3: ${(countHash[3]/count*100).toPrecision(3)}%
   4: ${(countHash[4]/count*100).toPrecision(3)}%
   5: ${(countHash[5]/count*100).toPrecision(3)}%`;
-    console.log(countHash);
-    console.log(count);
     return result;
   }
 }
@@ -74,9 +76,9 @@ class Generator {
 module.exports = Generator;
 
 //test script
-let one = new Generator();
-for(var i = 0; i <100 ; i++){
-  one.generateNum();
-}
-console.log(one.generateStats());
-console.log(one.lastNum());
+// let one = new Generator();
+// for(var i = 0; i <100 ; i++){
+//   one.generateNum();
+// }
+// console.log(one.generateStats());
+// console.log(one.lastNum());
